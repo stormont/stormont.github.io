@@ -206,7 +206,11 @@ view model =
               [ href "#"
               , onClick (ShowDisplay DisplayUser)
               ]
-              [ Html.text "Account" ]
+              [ img
+                  [ Html.Attributes.src "icons/profile_icon.png"
+                  , Html.Attributes.height 48
+                  ] []
+              ]
            ]
         )
     
@@ -285,11 +289,23 @@ renderConcern : Int -> DetailConcern -> Html Msg
 renderConcern detailId concern =
   div
     []
-    [ button [ onClick (DecrementConcern detailId concern.detailConcernId) ] [ Html.text "-" ]
-    , span
-        [ styles [ fontWeight bold, fontStyle italic ] ]
+    [ button
+        [ onClick (DecrementConcern detailId concern.detailConcernId) ]
+        [ img
+            [ Html.Attributes.src "icons/arrow_down.png"
+            , Html.Attributes.height 12
+            ] []
+        ]
+    , div
+        [ styles [ fontWeight bold, fontStyle italic, marginLeft (px 10) ] ]
         [ Html.text <| " " ++ (toString concern.detailConcernCount) ++ " " ]
-    , button [ onClick (IncrementConcern detailId concern.detailConcernId) ] [ Html.text "+" ]
+    , button
+        [ onClick (IncrementConcern detailId concern.detailConcernId) ]
+        [ img
+            [ Html.Attributes.src "icons/arrow_up.png"
+            , Html.Attributes.height 12
+            ] []
+        ]
     , Html.text <| " " ++ concern.detailConcernDescription
     , br [] []
     , br [] []
@@ -301,6 +317,19 @@ renderTileDetail detail =
   div
     [ styles [ margin (px 20) ] ]
     ( [ div
+          [ styles [ marginBottom (px 20) ] ]
+          [ a
+              [ href "#"
+              , onClick (ShowDisplay DisplayTiles)
+              ]
+              [ img
+                  [ Html.Attributes.src "icons/back_icon.png"
+                  , Html.Attributes.height 32
+                  ] []
+              ]
+          ]
+      ]
+    ++ ( [ div
           [ styles
               [ float left
               , marginRight (px 20)
@@ -319,9 +348,21 @@ renderTileDetail detail =
           , span
               [ styles [ fontStyle italic ] ]
               [ Html.text "Share via: "
-              , a [ href "#" ] [ Html.text "Facebook" ]
+              , a
+                  [ href "#" ]
+                  [ img
+                      [ Html.Attributes.src "icons/facebook_icon.png"
+                      , Html.Attributes.height 24
+                      ] []
+                  ]
               , Html.text " "
-              , a [ href "#" ] [ Html.text "Twitter" ]
+              , a
+                  [ href "#" ]
+                  [ img
+                      [ Html.Attributes.src "icons/twitter_icon.png"
+                      , Html.Attributes.height 24
+                      ] []
+                  ]
               ]
           , br [] []
           , br [] []
@@ -375,14 +416,8 @@ renderTileDetail detail =
           , a [ href "#" ] [ Html.text "(add item)" ]
           ]
       ]
-    ++ [ a
-          [ href "#"
-          , onClick (ShowDisplay DisplayTiles)
-          , styles [ float left ]
-          ]
-          [ Html.text "Back" ]
-        ]
     )
+  )
 
 
 renderUser : User -> Html Msg
@@ -390,6 +425,19 @@ renderUser user =
   div
     [ styles [ margin (px 20) ] ]
     ( [ div
+          [ styles [ marginBottom (px 20) ] ]
+          [ a
+              [ href "#"
+              , onClick (ShowDisplay DisplayTiles)
+              ]
+              [ img
+                  [ Html.Attributes.src "icons/back_icon.png"
+                  , Html.Attributes.height 32
+                  ] []
+              ]
+          ]
+      ]
+    ++ ( [ div
           [ styles
               [ border3 (px 1) solid (hex "000000")
               , float left
@@ -407,7 +455,12 @@ renderUser user =
                   , textAlign center
                   ]
               ]
-              [ Html.text "(img)" ]
+              [ img
+                  [ Html.Attributes.src "icons/profile_photo.png"
+                  , Html.Attributes.height 100
+                  ]
+                  []
+              ]
           , br [] []
           , div
               [ styles [ fontWeight bold ] ]
@@ -418,14 +471,8 @@ renderUser user =
           , Html.text <| "Comments voted up " ++ (toString user.userVotesUp) ++ " times"
           ]
       ]
-    ++ [ a
-          [ href "#"
-          , onClick (ShowDisplay DisplayTiles)
-          , styles [ float left ]
-          ]
-          [ Html.text "Back" ]
-        ]
     )
+  )
 
 
 -- ENTRY POINT
@@ -458,7 +505,7 @@ initializeApp =
                   "$8,000 (on budget)"
                   "Fall 2017"
                   73
-                  [ DetailConcern 1 "What will be the open hours of the park?" 23
+                  [ DetailConcern 1 "What hours will the park be open?" 23
                   , DetailConcern 2 "What breeds of dogs will be allowed?" 6
                   ]
               )
@@ -498,6 +545,6 @@ initializeApp =
                   []
               )
           ]
-      |> setModelUser (User "John Doe" 13 6)
+      |> setModelUser (User "Jane Doe" 13 6)
   , Cmd.none
   )

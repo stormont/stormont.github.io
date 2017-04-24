@@ -1,12 +1,6 @@
 <!DOCTYPE HTML>
 <html><head><meta charset="UTF-8"><title>Main</title><style>html,head,body { padding:0; margin:0; }
-body { font-family: calibri, helvetica, arial, sans-serif; }</style>
-<style>
-.tile:hover {
-  background-color: #eeeeee;
-}
-</style>
-<script type="text/javascript">
+body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
 (function() {
 'use strict';
 
@@ -13481,7 +13475,7 @@ var _user$project$Main$initializeApp = {
 	ctor: '_Tuple2',
 	_0: A2(
 		_user$project$Main$setModelUser,
-		A3(_user$project$Main$User, 'John Doe', 13, 6),
+		A3(_user$project$Main$User, 'Jane Doe', 13, 6),
 		A2(
 			_user$project$Main$setModelTiles,
 			{
@@ -13517,7 +13511,7 @@ var _user$project$Main$initializeApp = {
 						73,
 						{
 							ctor: '::',
-							_0: A3(_user$project$Main$DetailConcern, 1, 'What will be the open hours of the park?', 23),
+							_0: A3(_user$project$Main$DetailConcern, 1, 'What hours will the park be open?', 23),
 							_1: {
 								ctor: '::',
 								_0: A3(_user$project$Main$DetailConcern, 2, 'What breeds of dogs will be allowed?', 6),
@@ -13640,13 +13634,24 @@ var _user$project$Main$renderConcern = F2(
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('-'),
+						_0: A2(
+							_elm_lang$html$Html$img,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src('icons/arrow_down.png'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$height(12),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$span,
+						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
 							_0: _user$project$Main$styles(
@@ -13656,7 +13661,12 @@ var _user$project$Main$renderConcern = F2(
 									_1: {
 										ctor: '::',
 										_0: _rtfeldman$elm_css$Css$fontStyle(_rtfeldman$elm_css$Css$italic),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _rtfeldman$elm_css$Css$marginLeft(
+												_rtfeldman$elm_css$Css$px(10)),
+											_1: {ctor: '[]'}
+										}
 									}
 								}),
 							_1: {ctor: '[]'}
@@ -13685,7 +13695,18 @@ var _user$project$Main$renderConcern = F2(
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('+'),
+								_0: A2(
+									_elm_lang$html$Html$img,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src('icons/arrow_up.png'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$height(12),
+											_1: {ctor: '[]'}
+										}
+									},
+									{ctor: '[]'}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -14042,6 +14063,55 @@ var _user$project$Main$renderTileDetail = function (detail) {
 						_0: _user$project$Main$styles(
 							{
 								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$marginBottom(
+									_rtfeldman$elm_css$Css$px(20)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$href('#'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$Main$ShowDisplay(_user$project$Main$DisplayTiles)),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$img,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src('icons/back_icon.png'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$height(32),
+											_1: {ctor: '[]'}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _user$project$Main$styles(
+							{
+								ctor: '::',
 								_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
 								_1: {
 									ctor: '::',
@@ -14154,7 +14224,18 @@ var _user$project$Main$renderTileDetail = function (detail) {
 															},
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html$text('Facebook'),
+																_0: A2(
+																	_elm_lang$html$Html$img,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$src('icons/facebook_icon.png'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$height(24),
+																			_1: {ctor: '[]'}
+																		}
+																	},
+																	{ctor: '[]'}),
 																_1: {ctor: '[]'}
 															}),
 														_1: {
@@ -14171,7 +14252,18 @@ var _user$project$Main$renderTileDetail = function (detail) {
 																	},
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html$text('Twitter'),
+																		_0: A2(
+																			_elm_lang$html$Html$img,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$src('icons/twitter_icon.png'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$height(24),
+																					_1: {ctor: '[]'}
+																				}
+																			},
+																			{ctor: '[]'}),
 																		_1: {ctor: '[]'}
 																	}),
 																_1: {ctor: '[]'}
@@ -14521,36 +14613,6 @@ var _user$project$Main$renderTileDetail = function (detail) {
 						}),
 					_1: {ctor: '[]'}
 				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$a,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$href('#'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								_user$project$Main$ShowDisplay(_user$project$Main$DisplayTiles)),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Main$styles(
-									{
-										ctor: '::',
-										_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Back'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
 			}));
 };
 var _user$project$Main$renderUser = function (user) {
@@ -14569,6 +14631,55 @@ var _user$project$Main$renderUser = function (user) {
 		},
 		A2(
 			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _user$project$Main$styles(
+							{
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$marginBottom(
+									_rtfeldman$elm_css$Css$px(20)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$href('#'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$Main$ShowDisplay(_user$project$Main$DisplayTiles)),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$img,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src('icons/back_icon.png'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$height(32),
+											_1: {ctor: '[]'}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A2(
@@ -14645,7 +14756,18 @@ var _user$project$Main$renderUser = function (user) {
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('(img)'),
+								_0: A2(
+									_elm_lang$html$Html$img,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src('icons/profile_photo.png'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$height(100),
+											_1: {ctor: '[]'}
+										}
+									},
+									{ctor: '[]'}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -14714,36 +14836,6 @@ var _user$project$Main$renderUser = function (user) {
 						}
 					}),
 				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$a,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$href('#'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								_user$project$Main$ShowDisplay(_user$project$Main$DisplayTiles)),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Main$styles(
-									{
-										ctor: '::',
-										_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Back'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
 			}));
 };
 var _user$project$Main$view = function (model) {
@@ -14782,7 +14874,18 @@ var _user$project$Main$view = function (model) {
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Account'),
+								_0: A2(
+									_elm_lang$html$Html$img,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src('icons/profile_icon.png'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$height(48),
+											_1: {ctor: '[]'}
+										}
+									},
+									{ctor: '[]'}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
