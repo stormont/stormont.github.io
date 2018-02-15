@@ -1,0 +1,139 @@
+<html>
+<head>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body style="font-family: Verdana, Geneva, serif; margin: 0; padding: 0">
+
+  <div style="padding: 30px">
+    <div style="width: 65%; float: left; vertical-align: middle">
+
+        <h2>Personalized Health Recommendation:</h2>
+
+        <p style="margin-top: 30px">
+            <img src="thumbs_up.svg" height="80px" style="padding-left: 80px; vertical-align: middle" />
+            <span style="vertical-align: middle; display: inline-block; margin-left: 30px; font-size: 24px">Doing great, keep up the good work!</span>
+        </p>
+
+        <h3 style="color: red; margin-top: 30px">Cautions:</h3>
+        
+        <ul>
+            <li style="margin-bottom: 10px">You look like you could use a bit more sleep. Try to <strong style="color: blue">get to bed earlier</strong> this week.</li>
+            <li style="margin-bottom: 10px">You have a long flight coming up in two weeks. Make sure to get in some <strong style="color: blue">extra physical activity</strong> before the flight, to prevent being sedentary for too long.</li>
+        </ul>
+
+    </div>
+
+    <div style="width: 25%; float: right; background-color: rgb(255, 245, 200); border:slategray 3px solid; border-radius: 36px; padding-left: 20px; padding-right: 20px">
+
+        <h3 style="color: rgb(255, 0, 0)">Your Elevated Risks:</h3>
+        <ul>
+            <li style="margin-bottom: 10px">Venous Thromboembelism<br /><i>(can lead to stroke)</i></li>
+            <li style="margin-bottom: 10px">Atrial Fibrillation<br /><i>(can lead to heart failure)</i></li>
+            <li style="margin-bottom: 10px">Being Awesome<br /><i>(until sudden death)</i></li>
+        </ul>
+        <p style="line-height: 1.5em">
+            <strong>Age:</strong> 33<br />
+            <strong>Height:</strong> 170cm<br />
+            <strong>Weight:</strong> 59kg<br />
+            <strong>Smoke cigarettes?</strong> No
+        </p>
+
+    </div>
+  </div>
+  
+  <div style="clear: both"></div>
+  
+  <div style="margin-top: 30px;">
+    <div id="sleep_container" style="height: 200px; width: 20%; float: left;"></div>
+    <div id="activity_container" style="height: 200px; width: 20%; float: left; margin-left: 5%;"></div>
+    <div id="heart_rate_container" style="height: 200px; width: 20%; float: left; margin-left: 5%;"></div>
+    <div id="breath_rate_container" style="height: 200px; width: 20%; float: left; margin-left: 5%;"></div>      
+  </div>
+  
+  <script type="text/javascript">
+
+var buildChart = function(container, title, y_label, data) {
+    var avg_data = 0;
+
+    for (var i = 0; i < data.length; i += 1) {
+        avg_data += data[i][1];
+    }
+
+    avg_data = Math.round(avg_data / data.length * 10) / 10;
+
+    Highcharts.chart(container, {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: title + '<br />(Avg. = ' + avg_data + ' ' + y_label.toLowerCase() + ')'
+        },
+        xAxis: {
+            reversed: true,
+            title: {
+                enabled: true,
+                text: 'Days Ago'
+            },
+            maxPadding: 0.05,
+            tickInterval: 1
+        },
+        yAxis: {
+            title: {
+                text: y_label
+            },
+            labels: {
+                format: '{value}'
+            },
+            lineWidth: 2,
+            min: 0
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br/>',
+            pointFormat: '{point.x} days ago: {point.y} ' + y_label.toLowerCase()
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enable: false
+                }
+            }
+        },
+        series: [{
+            name: title,
+            data: data
+        }]
+    });
+};
+
+var dict_to_array = function(dict) {
+    var array = []
+
+    for (var key in dict) {
+        array.push([array.length, dict[key]])
+    }
+
+    return array;
+};
+
+window.onload = function() {
+  $.getJSON("plot_coord.json", function(json) {
+    var activity_data = dict_to_array(json["Activity"]["Minutes Very Active"]);
+    var sleep_data = dict_to_array(json["Sleep"]["Sleep [h]"]);
+    var heart_rate_data = dict_to_array(json["Heart Rate"]["Heart Rate [beat\\/min]"]);
+    var breath_rate_data = dict_to_array(json["Respiration"]["Respiratory Rate [breath\\/min]"]);
+
+    buildChart('sleep_container', 'Sleep', 'Hours', sleep_data);
+    buildChart('activity_container', 'Active Movement', 'Minutes', activity_data);
+    buildChart('heart_rate_container', 'Heart Rate', 'Beats/min.', heart_rate_data);
+    buildChart('breath_rate_container', 'Breath Rate', 'Breaths/min.', breath_rate_data);
+  });
+};
+
+  </script>
+
+</body>
+</html>
